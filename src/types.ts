@@ -54,7 +54,9 @@ type OpResponseTypes<OP> = OP extends {
   responses: infer R
 }
   ? {
-      [S in keyof R]: R[S] extends { schema?: infer S } // openapi 2
+      [S in keyof R]: R[S] extends never
+        ? undefined
+        : R[S] extends { schema?: infer S } // openapi 2
         ? S
         : R[S] extends JSONBody<infer C> // openapi 3
         ? C
@@ -64,15 +66,7 @@ type OpResponseTypes<OP> = OP extends {
     }
   : never
 
-type _OpReturnType<T> = 200 extends keyof T
-  ? T[200]
-  : 201 extends keyof T
-  ? T[201]
-  : 202 extends keyof T
-  ? T[202]
-  : 'default' extends keyof T
-  ? T['default']
-  : unknown
+type _OpReturnType<T> = keyof T extends number | 'default' ? T[keyof T] : never
 
 export type OpReturnType<OP> = _OpReturnType<OpResponseTypes<OP>>
 

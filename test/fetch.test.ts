@@ -120,9 +120,15 @@ describe('fetch', () => {
 
   it(`POST /nocontent`, async () => {
     const fun = fetcher.path('/nocontent').method('post').create({})
-    const { status, data } = await fun(undefined)
+    const response = await fun(undefined)
+    const { status, data } = response
+    // if (response.status === 200) {
+    //   response.data.message
+    // }
     expect(status).toBe(204)
     expect(data).toBeUndefined()
+    expect(data).toEqual(undefined)
+    assertType<{ message: string } | undefined>()(data)
   })
 
   it('GET /error', async () => {

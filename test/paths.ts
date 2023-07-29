@@ -73,7 +73,8 @@ export type paths = {
     post: {
       parameters: {}
       responses: {
-        204: unknown
+        200: { schema: { message: string } }
+        204: never
       }
     }
   }
