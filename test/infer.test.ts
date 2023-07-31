@@ -71,6 +71,8 @@ describe('infer', () => {
     expect(same).toBe(true)
 
     const ret: Openapi2['Return'] = {} as any
+    // url is does not exist on the error case
+    // the status code should descriminate the type
     expect(ret.url).toBeUndefined()
   })
 
