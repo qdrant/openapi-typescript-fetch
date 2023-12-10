@@ -112,14 +112,14 @@ describe('fetch', () => {
   })
 
   it(`POST /accepted`, async () => {
-    const fun = fetcher.path('/accepted').method('post').create()
+    const fun = fetcher.path('/accepted').method('post').create({})
     const { status, data } = await fun(undefined)
     expect(status).toBe(202)
     expect(data.message).toBe('Accepted')
   })
 
   it(`POST /nocontent`, async () => {
-    const fun = fetcher.path('/nocontent').method('post').create()
+    const fun = fetcher.path('/nocontent').method('post').create({})
     const { status, data } = await fun(undefined)
     expect(status).toBe(204)
     expect(data).toBeUndefined()
