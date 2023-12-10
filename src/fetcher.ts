@@ -14,6 +14,7 @@ import {
   _TypedFetch,
   TypedFetch,
 } from './types.js'
+import JSONbig from 'json-bigint'
 
 const sendBody = (method: Method) =>
   method === 'post' ||
@@ -152,11 +153,12 @@ async function getResponseData(response: Response) {
     return undefined
   }
   if (contentType && contentType.indexOf('application/json') !== -1) {
-    return await response.json()
+    const text = await response.text()
+    return JSONbig.parse(text)
   }
   const text = await response.text()
   try {
-    return JSON.parse(text)
+    return JSONbig.parse(text)
   } catch (e) {
     return text
   }

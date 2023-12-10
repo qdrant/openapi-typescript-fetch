@@ -1,5 +1,14 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  json-bigint:
+    specifier: ^1.0.0
+    version: 1.0.0
+
 devDependencies:
   '@changesets/changelog-github':
     specifier: 0.4.8
@@ -10,6 +19,9 @@ devDependencies:
   '@types/jest':
     specifier: ^28.0.0
     version: 28.1.0
+  '@types/json-bigint':
+    specifier: ^1.0.4
+    version: 1.0.4
   '@typescript-eslint/eslint-plugin':
     specifier: ^4.30.0
     version: 4.30.0(@typescript-eslint/parser@4.31.0)(eslint@7.32.0)(typescript@4.7.2)
@@ -1098,6 +1110,10 @@ packages:
       '@types/tough-cookie': 4.0.2
     dev: true
 
+  /@types/json-bigint@1.0.4:
+    resolution: {integrity: sha512-ydHooXLbOmxBbubnA7Eh+RpBzuaIiQjh8WGJYQB50JFGFrdxW7JzVlyEV7fAXw0T2sqJ1ysTneJbiyNLqZRAag==}
+    dev: true
+
   /@types/json-schema@7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
@@ -1566,6 +1582,10 @@ packages:
     dependencies:
       is-windows: 1.0.2
     dev: true
+
+  /bignumber.js@9.1.2:
+    resolution: {integrity: sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==}
+    dev: false
 
   /binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
@@ -3583,6 +3603,12 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
     dev: true
+
+  /json-bigint@1.0.0:
+    resolution: {integrity: sha512-SiPv/8VpZuWbvLSMtTDU8hEfrZWg/mH/nV/b4o0CYbSxu1UIQPLdwKOCIyLQX+VIPO5vrLX3i8qtqFyhdPSUSQ==}
+    dependencies:
+      bignumber.js: 9.1.2
+    dev: false
 
   /json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
