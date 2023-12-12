@@ -95,7 +95,7 @@ function getBody(method: Method, payload: unknown): CustomRequestInit['body'] {
   if (!sendBody(method)) {
     return
   }
-  const body = payload instanceof FormData ? payload : JSON.stringify(payload)
+  const body = payload instanceof FormData ? payload : JSONbig.stringify(payload)
   // if delete don't send body if empty
   return method === 'delete' && body === '{}' ? undefined : body
 }
