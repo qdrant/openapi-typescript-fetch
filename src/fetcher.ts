@@ -14,7 +14,7 @@ import {
   _TypedFetch,
   TypedFetch,
 } from './types.js'
-import { JSONParse, JSONStringify } from "./jsonParser.js";
+import { JSONParse, JSONStringify } from './jsonParser.js'
 
 const sendBody = (method: Method) =>
   method === 'post' ||
@@ -95,7 +95,8 @@ function getBody(method: Method, payload: unknown): CustomRequestInit['body'] {
   if (!sendBody(method)) {
     return
   }
-  const body = payload instanceof FormData ? payload : JSONStringify(payload as any)
+  const body =
+    payload instanceof FormData ? payload : JSONStringify(payload as any)
   // if delete don't send body if empty
   return method === 'delete' && body === '{}' ? undefined : body
 }
