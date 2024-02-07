@@ -14,7 +14,7 @@ import {
   _TypedFetch,
   TypedFetch,
 } from './types.js'
-import JSONbig from 'json-bigint'
+import { JSONParse, JSONStringify } from "./jsonParser.js";
 
 const sendBody = (method: Method) =>
   method === 'post' ||
@@ -95,7 +95,7 @@ function getBody(method: Method, payload: unknown): CustomRequestInit['body'] {
   if (!sendBody(method)) {
     return
   }
-  const body = payload instanceof FormData ? payload : JSONbig.stringify(payload)
+  const body = payload instanceof FormData ? payload : JSONStringify(payload as any)
   // if delete don't send body if empty
   return method === 'delete' && body === '{}' ? undefined : body
 }
@@ -154,11 +154,11 @@ async function getResponseData(response: Response) {
   }
   if (contentType && contentType.indexOf('application/json') !== -1) {
     const text = await response.text()
-    return JSONbig.parse(text)
+    return JSONParse(text)
   }
   const text = await response.text()
   try {
-    return JSONbig.parse(text)
+    return JSONParse(text)
   } catch (e) {
     return text
   }

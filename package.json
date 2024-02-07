@@ -77,7 +77,6 @@
     "@changesets/changelog-github": "0.4.8",
     "@changesets/cli": "2.26.1",
     "@types/jest": "^28.0.0",
-    "@types/json-bigint": "^1.0.4",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.31.0",
     "codecov": "^3.8.2",
@@ -121,6 +120,6 @@
     "ci:release": "pnpm changeset publish"
   },
   "dependencies": {
-    "json-bigint": "^1.0.0"
+    "json-with-bigint": "^2.1.0"
   }
 }
