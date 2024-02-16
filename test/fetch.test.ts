@@ -59,10 +59,11 @@ describe('fetch', () => {
       const { data } = await fun({
         id: 1,
         list: ['b', 'c'],
+        bigInt: BigInt('9007199254740992'),
       })
 
       expect(data.params).toEqual({ id: '1' })
-      expect(data.body).toEqual({ list: ['b', 'c'] })
+      expect(data.body).toEqual({ list: ['b', 'c'], bigInt: 9007199254740992n})
       expect(data.query).toEqual({})
       expect(data.headers).toEqual(expectedHeadersWithBody)
     })
