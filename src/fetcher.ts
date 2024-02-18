@@ -14,7 +14,7 @@ import {
   _TypedFetch,
   TypedFetch,
 } from './types.js'
-import { JSONParse, JSONStringify } from './jsonParser.js'
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 
 const sendBody = (method: Method) =>
   method === 'post' ||
