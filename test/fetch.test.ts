@@ -63,7 +63,7 @@ describe('fetch', () => {
       })
 
       expect(data.params).toEqual({ id: '1' })
-      expect(data.body).toEqual({ list: ['b', 'c'], bigInt: 9007199254740992n})
+      expect(data.body).toEqual({ list: ['b', 'c'], bigInt: 9007199254740992n })
       expect(data.query).toEqual({})
       expect(data.headers).toEqual(expectedHeadersWithBody)
     })
