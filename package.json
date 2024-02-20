@@ -1,7 +1,7 @@
 {
   "name": "@qdrant/openapi-typescript-fetch",
   "description": "A typed fetch client for openapi-typescript",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "engines": {
     "node": ">=12.0.0",
     "pnpm": ">=8"
@@ -118,8 +118,5 @@
     "tsc:check": "tsc --noEmit",
     "ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add .",
     "ci:release": "pnpm changeset publish"
-  },
-  "dependencies": {
-    "json-with-bigint": "^2.1.0"
   }
 }

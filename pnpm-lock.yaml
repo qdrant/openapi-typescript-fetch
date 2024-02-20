@@ -11,11 +11,6 @@ overrides:
   word-wrap: 1.2.4
   graphql: ' 16.8.1 '
 
-dependencies:
-  json-with-bigint:
-    specifier: ^2.1.0
-    version: 2.1.0
-
 devDependencies:
   '@changesets/changelog-github':
     specifier: 0.4.8
@@ -3690,10 +3685,6 @@ packages:
   /json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
-
-  /json-with-bigint@2.1.0:
-    resolution: {integrity: sha512-YPzGFHUMINmXqw4iK1pRPDp71nRaxXtoGenmGycRVCOcp47nMkgbrJwT0dYjeHeLzS+knsWlJo7x5F4kEIf5Fg==}
-    dev: false
 
   /json5@2.2.3:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}

@@ -1,5 +1,11 @@
 # @qdrant/openapi-typescript-fetch
 
+## 1.2.3
+
+### Patch Changes
+
+- Temporarily pack json-with-bigint locally until this package supports CJS modules
+
 ## 1.2.2
 
 ### Patch Changes
