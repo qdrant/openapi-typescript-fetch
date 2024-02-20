@@ -14,7 +14,41 @@ import {
   _TypedFetch,
   TypedFetch,
 } from './types.js'
-import { JSONParse, JSONStringify } from './json-with-bigint.js'
+
+declare global {
+  interface JSON {
+    rawJSON?(jsonStr: string): {
+      rawJSON: string
+    }
+  }
+}
+
+type JSONReviverReplacer = (
+  key: string,
+  val: any,
+  context?: {
+    /** Only provided if a value is primitive */
+    source?: any
+  },
+) => any
+
+let bigintReviver: JSONReviverReplacer | undefined
+let bigintReplacer: JSONReviverReplacer | undefined
+
+if ('rawJSON' in JSON) {
+  bigintReviver = function (_key, val, context) {
+    if (typeof val === 'number' && !Number.isSafeInteger(val)) {
+      return BigInt(context!.source) // eslint-disable-line @typescript-eslint/no-non-null-assertion
+    }
+    return val
+  }
+  bigintReplacer = function (_key, val) {
+    if (typeof val === 'bigint') {
+      return JSON.rawJSON!(String(val)) // eslint-disable-line @typescript-eslint/no-non-null-assertion
+    }
+    return val
+  }
+}
 
 const sendBody = (method: Method) =>
   method === 'post' ||
@@ -96,7 +130,9 @@ function getBody(method: Method, payload: unknown): CustomRequestInit['body'] {
     return
   }
   const body =
-    payload instanceof FormData ? payload : JSONStringify(payload as any)
+    payload instanceof FormData
+      ? payload
+      : JSON.stringify(payload, bigintReplacer)
   // if delete don't send body if empty
   return method === 'delete' && body === '{}' ? undefined : body
 }
@@ -156,11 +192,11 @@ async function getResponseData(response: Response) {
   const contentType = response.headers.get('content-type')
   const responseText = await response.text()
   if (contentType && contentType.includes('application/json')) {
-    return JSONParse(responseText)
+    return JSON.parse(responseText, bigintReviver)
   }
 
   try {
-    return JSONParse(responseText)
+    return JSON.parse(responseText, bigintReviver)
   } catch (e) {
     return responseText
   }
