@@ -194,17 +194,24 @@ const body = arrayRequestBody([{ item: 1 }], { param: 2 })
 // body type is { item: number }[] & { param: number }
 ```
 
-### JSON response serializing/deserializing long int (BigInt)
+### Long numeric values (de)serialization: BigInt
 
 Stringifying and parsing big numeric values could be problematic. JSON.parse will coerce large numeric values and JSON.stringify will throw an error: `Uncaught TypeError: Do not know how to serialize a BigInt` in such cases.
 
-To circumvent this issue, `BigInt` is replaced with `rawJSON` while serializing and JSON.parse relies on [source text access](https://github.com/tc39/proposal-json-parse-with-source) to transform big numeric values into `BigInt` automatically.
+To circumvent this issue, this library will serialize big numeric values to `BigInt` using `JSON.rawJSON`, and equally parse big numeric values from responses via `JSON.parse` [source text access](https://github.com/tc39/proposal-json-parse-with-source) transforming them to `BigInt` for you.
 
-#### JS engine support
+> If you rely on the precision of big number in responses, or are sending big numeric values, make sure your JavaScript environment supports it. Read below...
 
-Support for this is conditional, the TC39 proposal has reached staged 3 and has shipped with Chrome by default already, with the rest of modern browsers [soon to follow](https://github.com/tc39/proposal-json-parse-with-source/issues/15#issue-664090651) with their corresponding releases. For Node.js support, at least Node 20 is required to be run with the next harmony flag `node --harmony-json-parse-with-source`, until it is switched by default in future versions.
+#### JavaScript engine/environment support
 
-If you rely on the precision of big number in responses, or are sending big numeric values, make sure your JavaScript environment supports it.
+##### TL;DR
+
+- Node 21
+- Chrome 112
+
+Support is conditional; the TC39 proposal has reached staged 3 and has even shipped with Chrome by default already, with the rest of modern browsers [soon to follow](https://github.com/tc39/proposal-json-parse-with-source/issues/15#issue-664090651) with their corresponding releases.
+
+Regarding Node.js support; at **least Node 20 is required** to be run with the next harmony flag `node --harmony-json-parse-with-source` (or Node 21 without flag 🎉), until it is switched by default in future versions.
 
 ---
 
