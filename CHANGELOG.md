@@ -1,5 +1,11 @@
 # @qdrant/openapi-typescript-fetch
 
+## 1.2.4
+
+### Patch Changes
+
+- Native JSON support for response serializing/deserializing long int (BigInt)
+
 ## 1.2.3
 
 ### Patch Changes

@@ -59,11 +59,10 @@ describe('fetch', () => {
       const { data } = await fun({
         id: 1,
         list: ['b', 'c'],
-        bigInt: BigInt('9007199254740992'),
       })
 
       expect(data.params).toEqual({ id: '1' })
-      expect(data.body).toEqual({ list: ['b', 'c'], bigInt: 9007199254740992n })
+      expect(data.body).toEqual({ list: ['b', 'c'] })
       expect(data.query).toEqual({})
       expect(data.headers).toEqual(expectedHeadersWithBody)
     })
@@ -110,6 +109,26 @@ describe('fetch', () => {
     expect(data.params).toEqual({ id: '1' })
     expect(data.headers).toHaveProperty('accept')
     expect(data.headers).not.toHaveProperty('content-type')
+  })
+
+  it('POST /body/{id} (bigint)', async () => {
+    const fun = fetcher.path('/body/{id}').method('post').create()
+
+    const safeInteger = Number.MAX_SAFE_INTEGER
+    const tooBigForNumber = BigInt(String(safeInteger + 2))
+    // transforms to BigInt as it exceeds the limit
+    const result1 = await fun({ id: 1, bigInt: tooBigForNumber })
+    expect(result1.data.body).toEqual({ bigInt: tooBigForNumber })
+    // way too big for number
+    const wayTooBig = BigInt('1' + '0'.repeat(20))
+    const result2 = await fun({ id: 1, bigInt: wayTooBig })
+    expect(result2.data.body).toEqual({ bigInt: wayTooBig })
+    // keeps it as safe integer as it does not exceed the limit
+    const result3 = await fun({ id: 1, bigInt: BigInt(safeInteger) })
+    expect(result3.data.body).toEqual({ bigInt: safeInteger })
+    // does not influence floats
+    const result4 = await fun({ id: 1, bigInt: 0.9007199254740991 })
+    expect(result4.data.body).toEqual({ bigInt: 0.9007199254740991 })
   })
 
   it(`POST /accepted`, async () => {
