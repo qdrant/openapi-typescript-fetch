@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "module": "node16",
-        "outDir": "./dist/esm"
+        "outDir": "./dist/esm",
+        "types": ["node", "jest"]
     },
     "extends": "./tsconfig.base.json"
 }
