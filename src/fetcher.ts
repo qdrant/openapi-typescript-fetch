@@ -37,7 +37,7 @@ let bigintReplacer: JSONReviverReplacer | undefined
 
 if ('rawJSON' in JSON) {
   bigintReviver = function (_key, val, context) {
-    if (typeof val === 'number' && !Number.isSafeInteger(val)) {
+    if (Number.isInteger(val) && !Number.isSafeInteger(val)) {
       return BigInt(context!.source) // eslint-disable-line @typescript-eslint/no-non-null-assertion
     }
     return val

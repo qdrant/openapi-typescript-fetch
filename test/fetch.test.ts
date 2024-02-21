@@ -126,6 +126,9 @@ describe('fetch', () => {
     // keeps it as safe integer as it does not exceed the limit
     const result3 = await fun({ id: 1, bigInt: BigInt(safeInteger) })
     expect(result3.data.body).toEqual({ bigInt: safeInteger })
+    // does not influence floats
+    const result4 = await fun({ id: 1, bigInt: 0.9007199254740991 })
+    expect(result4.data.body).toEqual({ bigInt: 0.9007199254740991 })
   })
 
   it(`POST /accepted`, async () => {
