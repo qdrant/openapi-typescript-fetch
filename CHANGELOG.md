@@ -1,5 +1,11 @@
 # @qdrant/openapi-typescript-fetch
 
+## 1.2.5
+
+### Patch Changes
+
+- Return to Node.js 18 compatibility and skip BigInt support and test until Node 21
+
 ## 1.2.4
 
 ### Patch Changes
