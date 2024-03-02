@@ -1,5 +1,12 @@
 # @qdrant/openapi-typescript-fetch
 
+## 1.2.6
+
+### Patch Changes
+
+- Fix: BigInt conversion issue for scientific notation numbers 
+
+
 ## 1.2.5
 
 ### Patch Changes
