@@ -131,6 +131,10 @@ describe('fetch', () => {
       // does not influence floats
       const result4 = await fun({ id: 1, bigInt: 0.9007199254740991 })
       expect(result4.data.body).toEqual({ bigInt: 0.9007199254740991 })
+      // does not influence scientific notation
+      const scientificNotationNumber = 1e21
+      const result5 = await fun({ id: 1, bigInt: scientificNotationNumber })
+      expect(result5.data.body).toEqual({ bigInt: scientificNotationNumber })
     })
   }
 
