@@ -40,7 +40,7 @@ if ('rawJSON' in JSON) {
     if (Number.isInteger(val) && !Number.isSafeInteger(val)) {
       try {
         return BigInt(context!.source) // eslint-disable-line @typescript-eslint/no-non-null-assertion
-      } catch (e) {
+      } catch {
         return val
       }
     }
